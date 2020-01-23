@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "Grade";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<SelectListItem> GradeList = ViewBag.GradeList;
+}
+
+<h4>Betygsätt tjänsten</h4>
+<p>Hur upplevde du vår bokningssida?</p>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="GradeRespons" method="post">
+            <div class="form-group">
+                @foreach (SelectListItem item in GradeList) {
+                    <input type="radio" name="Grade"
+                           value="@Html.DisplayFor(GradeList => item.Value)" />@item.Text
+                        <br />
+                    }
+            </div>
+            @Html.Partial("_FormSubmitButton", null,
+           new ViewDataDictionary(this.ViewData) { { "ButtonValue", "Slutför betygsättning" } })
+        </form>
+    </div>
+</div>
+

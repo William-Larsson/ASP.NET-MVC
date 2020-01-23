@@ -1,0 +1,34 @@
+﻿@model MoviesModel
+
+@{
+    ViewData["Title"] = "Purchase";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string movie = Model.Movie;
+    string tickets = Convert.ToString(Model.Tickets);
+    string popcorn;
+    string name;
+
+    if (Model.Name.Length > 0) {
+        name = Model.Name;
+    } else name = "kära kund";
+}
+
+<h4>Köp slutfört</h4>
+<hr />
+<div class="panel">
+    <div class="panel-body">
+        <p>Tack för ditt köp @name.</p>
+        <p>Du har beställt @tickets biljetter till filmen <i>@movie</i>.</p>
+        @{
+            if (Model.Popcorn) {
+                <p>Till filmen har du även köpt popcorn. Hoppas det smakar!</p>
+            }
+        }
+    </div>
+
+</div>
+<hr />
+<div>
+    <a asp-action="Grade" type="submit" class="btn btn-primary">Betygsätt din upplevelse</a>
+</div>

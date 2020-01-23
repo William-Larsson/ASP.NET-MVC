@@ -3,15 +3,17 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    IEnumerable<SelectListItem> moviesList = (IEnumerable<SelectListItem>)ViewData["moviesInList"];
 }
 
 <h1>Umeå biosalong</h1>
-
 <h4>Köp dina biobiljetter här!</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Index">
+        <!--"Purchase" is the page to load using "post" when the submit-button is pressed-->
+        <form asp-action="Purchase" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -20,13 +22,10 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="ListOfMovies" class="control-label"></label>
-                <div class="align-content-lg-start">
-                    @Html.DropDownList("Movies", (IEnumerable<SelectListItem>)Model.ListOfMovies)
-                </div>
-                <span asp-validation-for="ListOfMovies" class="text-danger"></span>
+                <label class="control-label">Välj film:</label>
+                @Html.DropDownList("MoviesList", moviesList, new { @class = "form-control" })
             </div>
-            
+
             <div class="form-group">
                 <label asp-for="Tickets" class="control-label"></label>
                 <input asp-for="Tickets" class="form-control" />
@@ -38,9 +37,10 @@
                     <input class="form-check-input" asp-for="Popcorn" /> @Html.DisplayNameFor(model => model.Popcorn)
                 </label>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Köp" class="btn btn-primary" />
-            </div>
+
+            @Html.Partial("_FormSubmitButton", null, 
+           new ViewDataDictionary(this.ViewData) { { "ButtonValue", "Slutför köp" } })
+
         </form>
     </div>
 </div>

@@ -1,0 +1,8 @@
+﻿@{ 
+    string btnValue = this.ViewData.ContainsKey("ButtonValue") 
+        ? this.ViewData["ButtonValue"].ToString() : "Fortsätt";
+}
+
+<div class="form-group">
+    <input type="submit" value="@btnValue" class="btn btn-primary" />
+</div>

@@ -1,47 +1,43 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
+
 
 namespace Inlämning_1.Models {
 
+    /// <summary>
+    /// A model that will store all the relevant information
+    /// about going to the movies,
+    /// </summary>
     public class MoviesModel {
 
         [DisplayName("Ditt namn:")]
-        [StringLength(40, ErrorMessage ="Namnet får maximalt innehålla 40 tecken.")]
+        [StringLength(50, ErrorMessage ="Namnet får maximalt innehålla 50 tecken.")]
         public string Name { get; set; }
 
 
-        [DisplayName("Välj film:")]
-        [Required(ErrorMessage = "* måste väljas.")]
-        public List<SelectListItem> ListOfMovies { get; set; }
+        [DisplayName("Film")]
+        public string Movie { get; set; }
 
 
         [DisplayName("Antal biljetter:")]
         [Required(ErrorMessage = "* måste ifyllas.")]
-        [Range(0, 10, ErrorMessage = "Du kan maximalt köpa 10 biljetter.")]
+        [Range(1, 10, ErrorMessage = "Du måste minst köpa en biljett, men inte fler än 10.")]
         public int Tickets { get; set; }
 
 
         [DisplayName("Vill du ha popcorn?")]
-        [Required(ErrorMessage = "* måste väljas.")] /// eventuellt ta bort pga false i kontstruktor?
+        [Required(ErrorMessage = "* måste väljas.")]
         public Boolean Popcorn { get; set; }
 
+        /// <summary>
+        /// Constructor, init values before using them
+        /// in a view.
+        /// </summary>
         public MoviesModel() {
             Name = "";
             Tickets = 0;
             Popcorn = false;
-            ListOfMovies = new List<SelectListItem> {
-                new SelectListItem("Inception", "Inception"),
-                new SelectListItem("Frozen", "Frozen"),
-                new SelectListItem("Life of Brian", "Life of Brian"),
-                new SelectListItem("Liar Liar", "Liar liar"),
-                new SelectListItem("Die Hard 2", "Die Hard 2")
-            };
         }
     }
 }

@@ -10,11 +10,18 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace Inlämning_1 {
+    /// <summary>
+    /// Setup all things needed at startup for the
+    /// application.
+    /// </summary>
     public class Startup {
         public Startup(IConfiguration configuration) {
             Configuration = configuration;
         }
 
+        /// <summary>
+        /// Added a session to the config.
+        /// </summary>
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -24,7 +31,7 @@ namespace Inlämning_1 {
             services.AddDistributedMemoryCache();
             services.AddSession(options => {
                 // set a short timeout for testing here
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
                 options.Cookie.HttpOnly = true;
             });
         }
