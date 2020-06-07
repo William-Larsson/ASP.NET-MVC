@@ -1,1 +1,7 @@
-ASP.NET Core MVC
+## ASP.NET MVC
+A ASP.NET Core MVC application. This project was made as an introduction to .NET, C# as well as an opporturnity to practice the MVC design pattern. 
+
+## What I learned
+* A greater understanding of MVC and has to use that on the web.
+* Using routing and URLs within the application
+* Learned to use the c# programming language.
